@@ -1,4 +1,4 @@
-package actuator_crtl
+package actuator_ctrl
 
 type HealthReq struct {
 }

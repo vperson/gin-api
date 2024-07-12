@@ -71,7 +71,9 @@ func main() {
 	}(ctx, &cfg.Server)
 
 	// 捕捉到SIGTERM和SIGINT信号时调用cancel
+	wg.Add(1)
 	go func() {
+		defer wg.Done()
 		signals := make(chan os.Signal, 1)
 		signal.Notify(signals, syscall.SIGTERM, syscall.SIGINT)
 

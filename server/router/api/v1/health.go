@@ -1,14 +1,14 @@
 package v1
 
 import (
-	"gin-api/server/controller/actuator_crtl"
+	"gin-api/server/controller/actuator_ctrl"
 	"gin-api/server/router/restful"
 	"github.com/gin-gonic/gin"
 )
 
 func Health(c *gin.Context) {
 	app := restful.New(c)
-	req := actuator_crtl.HealthReq{}
+	req := actuator_ctrl.HealthReq{}
 	if err := c.ShouldBindQuery(&req); err != nil {
 		app.StatusBadRequest(err.Error())
 		return
@@ -24,7 +24,7 @@ func Health(c *gin.Context) {
 
 func Info(c *gin.Context) {
 	app := restful.New(c)
-	req := actuator_crtl.InfoReq{}
+	req := actuator_ctrl.InfoReq{}
 	if err := c.ShouldBindQuery(&req); err != nil {
 		app.StatusBadRequest(err.Error())
 		return

@@ -1,6 +1,7 @@
 package restful
 
 import (
+	"errors"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -76,4 +77,18 @@ func (r *Response) StatusInternalServerError(errMsg string) {
 	}
 
 	r.c.JSON(http.StatusInternalServerError, resp)
+}
+
+// GetUserId 从header中获取userId,这个userId是从Jwt中解出来的
+func (r *Response) GetUserId() (uint, error) {
+	userIdInterface, exists := r.c.Get("userId")
+	if !exists {
+		return 0, errors.New("user id not found in context")
+	}
+	userId, ok := userIdInterface.(uint)
+	if !ok {
+		return 0, errors.New("failed to convert userId to uint")
+	}
+
+	return userId, nil
 }
