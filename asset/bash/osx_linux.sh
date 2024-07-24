@@ -2,7 +2,7 @@
 
 #https://gist.github.com/iamucil/7578dc7df7d72e1d78c8f5543db3fbcc
 # 设置默认值
-CUR="github.com/..."
+CUR="gin-api"
 NEW="${NEW:-}"
 
 # 检查 NEW 是否为空

@@ -18,15 +18,16 @@ func InitRouter() *gin.Engine {
 		actuator.GET("/health", v1.Health)
 		actuator.GET("/info", v1.Info)
 	}
-
-	anonymous := r.Group("/anonymous")
+	api := r.Group("/api")
+	api.Use(middleware.Cors())
+	anonymous := api.Group("/anonymous")
 	{
 		anonymous.GET("/info", v1.Info)
 		// 在下面增加其他匿名的接口
 	}
 
 	// 需要认证的接口
-	auth := r.Group("/auth", middleware.JWTAuthMiddleware())
+	auth := api.Group("/auth", middleware.JWTAuthMiddleware())
 	{
 		auth.GET("/info", v1.Info)
 		// 在下面增加其他需要认证的接口
