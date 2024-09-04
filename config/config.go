@@ -12,6 +12,7 @@ type Config struct {
 	Server        ServerConfig        `yaml:"server"`
 	DB            DBConfig            `yaml:"db"`
 	MetricsServer MetricsServerConfig `yaml:"metricsServer"`
+	Cache         CacheConfig         `yaml:"cache"`
 }
 
 func (c *Config) SetDefault() {
@@ -20,6 +21,7 @@ func (c *Config) SetDefault() {
 	c.Server.SetDefault()
 	c.DB.SetDefault()
 	c.MetricsServer.SetDefault()
+	c.Cache.SetDefault()
 }
 
 var config *Config

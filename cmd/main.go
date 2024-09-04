@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"gin-api/config"
 	"gin-api/pkg/logger"
+	"gin-api/repository/cache"
 	"gin-api/repository/store"
 	"gin-api/server"
 	"go.uber.org/zap"
@@ -53,6 +54,12 @@ func main() {
 	err = store.New(&cfg.DB)
 	if err != nil {
 		logger.GetStructuredLogger().Fatal("store init is failed", zap.Error(err))
+	}
+
+	// 初始化缓存Client
+	err = cache.NewClient(ctx, &cfg.Cache)
+	if err != nil {
+		logger.GetStructuredLogger().Fatal("cache init is failed", zap.Error(err))
 	}
 
 	// 运行metrics服务
